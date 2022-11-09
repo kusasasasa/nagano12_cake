@@ -1,19 +1,30 @@
 Rails.application.routes.draw do
-  
-  namespace :public do
-    get 'cart_items/index'
-  end
-  namespace :public do
+  namespace :admin do
+    get 'items/new'
     get 'items/index'
     get 'items/show'
+    get 'items/edit'
+    post 'items'=>'items#create'
+    
   end
-  namespace :admin do
-    get 'homes/top'
-  end
+   get 'customers/my_page/' => 'public/customers#show'
+ 
+  
   namespace :public do
+   
+    get 'customers/edit'
+
+    get 'cart_items/index'
+  
+    get 'items/index'
+    get 'items/show'
+ 
     
     get 'homes/top'
     get 'homes/about'
+  end
+  namespace :admin do
+    get 'homes/top'
   end
 
  devise_for :customers, controllers: {

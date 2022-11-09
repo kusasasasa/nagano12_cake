@@ -1,7 +1,7 @@
 <h1>Public top</h1>
 <%= link_to "サインアップ顧客",new_customer_registration_path%>
-<%= link_to "サインアップ", new_admin_registration_path%>
+<%= link_to "サインアップadmin", new_admin_registration_path%>
 <%= link_to "サインアウト", destroy_customer_session_path, method: :delete %>
-<%= link_to "サインアップ顧客",customer_session_path%>
-<%= link_to "サインアップ", admin_session_path%>
-<%= link_to "サインアウト", destroy_admin_session_path, method: :delete %>
+<%= link_to "サインイン顧客",customer_session_path%>
+<%= link_to "サインインadmin", admin_session_path%>
+<%= link_to "サインアウトadmin", destroy_admin_session_path, method: :delete %>
