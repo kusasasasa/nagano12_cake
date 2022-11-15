@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
   namespace :admin do
     get 'genres/index'
-    get 'genres/edit'
+    get 'genres/:id/edit' => 'genres#edit'
+    post 'genres/:id/edit'=> 'genres#edit'
+    
+    post 'genres'=>'genres#create'
+    patch 'genres/:id'=>'genres#update', as: 'update_genre'
   end
   namespace :admin do
     get 'items/new'
     get 'items/index'
-    get 'items/show'
-    get 'items/edit'
+    get 'items/:id'=> 'items#show', as: 'items_show'
+    get 'items/:id/edit/'=> 'items#edit', as: 'items_edit'
     post 'items'=>'items#create'
+    patch 'items/:id'=>'items#update', as: 'update_item'
     
   end
    get 'customers/my_page/' => 'public/customers#show'
