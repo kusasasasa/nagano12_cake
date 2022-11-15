@@ -1,7 +1,46 @@
 <h1>Public top</h1>
-<%= link_to "サインアップ顧客",new_customer_registration_path%>
-<%= link_to "サインアップadmin", new_admin_registration_path%>
-<%= link_to "サインアウト", destroy_customer_session_path, method: :delete %>
-<%= link_to "サインイン顧客",customer_session_path%>
-<%= link_to "サインインadmin", admin_session_path%>
-<%= link_to "サインアウトadmin", destroy_admin_session_path, method: :delete %>
+
+<P>ようこそ、ながのCAKEへ！</br>
+このサイトは、ケーキ販売のECサイトになります。</br>
+会員で無い方も商品の閲覧はできますが、</br>
+購入には会員登録が必要になります。</P>
+
+
+<h2>新着商品</h2>
+<% @items[0..3].each do |item| %>
+<li>
+    <td>画像</td>
+    <% if item.image.attached? %>
+        <td><%= image_tag item.image, size: "100x100" %></td>
+    <% else %>
+        <td><%= image_tag 'no_image', size: "100x100" %></td>
+    <% end %>
+    
+</li>
+  
+<li>
+    <td>商品名</td>
+    <td><%=item.name%></td>
+</li>
+<li>
+    <td>商品説明</td>
+    <td><%=item.introduction%></td>
+</li>
+<li>
+    <td>ジャンル</td>
+    <td><%=item.genre.name%></td>
+</li>
+<li>
+    <td>税込価格</td>
+    <td><%=item.price%></td>
+</li>
+<li>
+    <td>販売ステータス</td>
+    <%if item.is_active == true%>
+            <td>販売中</td>
+        <%else%>
+            <td>販売停止</td>
+        <%end%>
+</li>
+<%end%>
+<%=link_to"全ての商品を見る",public_items_index_path%>

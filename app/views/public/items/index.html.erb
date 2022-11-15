@@ -1,2 +1,26 @@
 <h1>商品一覧</h1>
 
+<% @items.each do |item| %>
+<li>
+    <td>画像</td>
+    <% if item.image.attached? %>
+        <td><%= image_tag item.image, size: "100x100" %></td>
+    <% else %>
+        <td><%= image_tag 'no_image', size: "100x100" %></td>
+    <% end %>
+    
+</li>
+  
+<li>
+    <td>商品名</td>
+    <td><%=item.name%></td>
+</li>
+
+<li>
+    <td>税込価格</td>
+    <td><%=item.price%></td>
+</li>
+
+
+<%end%>
+

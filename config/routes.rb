@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get 'cart_items/index'
   
     get 'items/index'
-    get 'items/show'
+    get 'items/:id'=> 'items#show', as: 'items_show'
  
     
     get 'homes/top'
