@@ -1,2 +1,36 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<h1>マイページ</h1>
+<h2>登録情報</h2>
+
+<%= link_to '編集する', customers_edit_path, class: 'nav-link text-dark' %>
+    <table>
+        <tr>氏名</tr>
+        <tr>カナ</tr>
+       
+        <tr>郵便番号</tr>
+        <tr>住所</tr>
+        <tr>電話番号</tr>
+        <tr>email</tr>
+        <td>
+            <%=@customer.first_name%>
+            <%=@customer.last_name%>
+        </td>
+        <td>
+            <%=@customer.first_name_kana%>
+            <%=@customer.last_name_kana%>
+        </td>
+        
+        <td>
+            <%=@customer.postal_code%>
+        </td>
+        <td>
+            <%=@customer.address%>
+        </td>
+        <td>
+            <%=@customer.telephone_number%>
+        </td>
+        <td>
+            <%=@customer.email%>
+        </td>
+     
+    </table>
+

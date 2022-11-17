@@ -16,12 +16,12 @@ Rails.application.routes.draw do
     patch 'items/:id'=>'items#update', as: 'update_item'
     
   end
-   get 'customers/my_page/' => 'public/customers#show'
- 
-  
+  get 'customers/my_page' => 'public/customers#show'
+  get 'customers/edit'=> 'public/customers#edit'
+  patch 'customers'=>'public/customers#update'
   namespace :public do
    
-    get 'customers/edit'
+    
 
     get 'cart_items/index'
   

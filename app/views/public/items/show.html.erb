@@ -23,6 +23,6 @@
     <td><%=@item.price%></td>
 </li>
 
-
+<%= select_tag 'name', options_for_select({"1": 1, "2": 2, "3": 3}, "個数を選択"), include_blank: true %>
 
 
