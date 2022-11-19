@@ -14,11 +14,14 @@ Rails.application.routes.draw do
     get 'items/:id/edit/'=> 'items#edit', as: 'items_edit'
     post 'items'=>'items#create'
     patch 'items/:id'=>'items#update', as: 'update_item'
+  
     
   end
   get 'customers/my_page' => 'public/customers#show'
   get 'customers/edit'=> 'public/customers#edit'
   patch 'customers'=>'public/customers#update'
+  get 'unsubscribe'=> 'public/customers#unsubscribe'
+  patch 'withdrow'=>'public/customers#withdrow'
   namespace :public do
    
     

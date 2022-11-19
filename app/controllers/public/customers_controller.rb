@@ -15,8 +15,15 @@ class Public::CustomersController < ApplicationController
     customer=current_customer
     customer.update(account_update_params)
     redirect_to customers_my_page_path 
- 
   end
+  def unsubscribe
+    @customer=current_customer
+  end
+  def withdrow
+    @customer=current_customer
+  end
+ 
+  
   private
   # ストロングパラメータ
   
