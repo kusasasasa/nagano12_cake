@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Public::SessionsController < Devise::SessionsController
   before_action :customer_state, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
@@ -31,8 +30,12 @@ class Public::SessionsController < Devise::SessionsController
   ## アカウントを取得できなかった場合、このメソッドを終了する
   return if !@customer
   ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
-  if @customer.valid_password?(params[:customer][:password])
-
+  if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
+        
+        redirect_to root_path
+  else
+        flash[:notice] = "項目を入力してください"
+  end
     ## 【処理内容3】
   end
 end
