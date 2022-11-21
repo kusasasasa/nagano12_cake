@@ -30,11 +30,13 @@ Rails.application.routes.draw do
   
     get 'items/index'
     get 'items/:id'=> 'items#show', as: 'items_show'
+    post '/cart_items'=>'cart_items#create'
  
     
     get 'homes/top'
     get 'homes/about'
   end
+  
   namespace :admin do
     get 'homes/top'
   end
