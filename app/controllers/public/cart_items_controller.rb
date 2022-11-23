@@ -1,6 +1,11 @@
 class Public::CartItemsController < ApplicationController
   def index
     @cart_items=CartItem.all
+    @items=Item.all
+    @item=Item.ids
+    @item_total=0
+  
+   
   end
   def create
   
@@ -11,6 +16,7 @@ class Public::CartItemsController < ApplicationController
     redirect_to public_cart_items_index_path
   end
   def update
+    
   end
   
   def destroy

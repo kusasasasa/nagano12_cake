@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   patch 'customers'=>'public/customers#update'
   get 'unsubscribe'=> 'public/customers#unsubscribe'
   patch 'withdrow'=>'public/customers#withdrow'
+  patch 'cart_items/:id'=>'public/cart_items#update', as: 'update_cart_items'
   namespace :public do
    
     
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'homes/top'
   end
+
 
  devise_for :customers, controllers: {
   registrations: "public/registrations",
