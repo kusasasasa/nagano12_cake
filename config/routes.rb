@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     get 'items/index'
     get 'items/:id'=> 'items#show', as: 'items_show'
     post '/cart_items'=>'cart_items#create'
+    delete 'cart_items/:id'=>'cart_items#destroy', as: 'destroy_cart_items'
+    delete 'destroy_all'=>'cart_items#destroy_all'
  
     
     get 'homes/top'
