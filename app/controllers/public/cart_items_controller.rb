@@ -1,8 +1,10 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!, only: [:index]
   def index
-   @cart_items=current_customer.cart_item.all
+   @cart_items=CartItem.all
    @items=Item.all
    @item_total=0
+
   
    
   end
@@ -34,6 +36,6 @@ class Public::CartItemsController < ApplicationController
   end
   private
   def cart_item_params
-      params.require(:cart_item).permit(:item_id, :amount)
+      params.require(:cart_item).permit(:item_id, :amount, :customer_id)
   end
 end

@@ -23,12 +23,21 @@ Rails.application.routes.draw do
   get 'unsubscribe'=> 'public/customers#unsubscribe'
   patch 'withdrow'=>'public/customers#withdrow'
   patch 'cart_items/:id'=>'public/cart_items#update', as: 'update_cart_items'
+  post 'orders'=> 'public/orders#create'
   namespace :public do
    
+    get 'orders'=> 'orders#index'
+    get 'orders/new'=> 'orders#new'
+    get 'orders/:id'=> 'orders#show'
     
+    get 'orders/compelte'=> 'orders#compelte'
+    post 'orders/confirm'=> 'orders#confirm'
 
     get 'cart_items/index'
-  
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
+    post '/addresses'=>'addresses#create',as: 'create_addresses'
+    delete 'addresses/:id'=>'addresses#destroy', as: 'destroy_addresses'
+    patch  'addresses/:id'=>'addresses#update', as: 'update_addresses'
     get 'items/index'
     get 'items/:id'=> 'items#show', as: 'items_show'
     post '/cart_items'=>'cart_items#create'

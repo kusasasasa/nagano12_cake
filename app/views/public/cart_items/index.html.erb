@@ -13,7 +13,7 @@
     </tr>
 
 <% @cart_items.each do |cart_item| %>
-
+        <% if current_customer.id==cart_item.customer_id %>
         <tr>
         
             <td><%=cart_item.item.name%></td>
@@ -33,14 +33,22 @@
                 <%= form_with model: cart_item, url:  public_destroy_cart_items_path(cart_item.id), method: :delete do |f| %>
                     <td><%= f.submit '投稿' %></td>
                 <% end %>
-            
+          
+       
         </tr>
-        
+        <%end%>
+    
              
-     <tr>
-        <td><%= @item_total%></td>
-    </tr>   
+      
 <%end%>
+
+<tr>
+        <td>購入金額</td>
+        <td><%= @item_total%></td>
+</tr> 
 <%= button_to "全て削除", public_destroy_all_path, method: :delete %>
 
 </table>
+ <%= form_with model: @cart_item, url: public_orders_new_path , method: :get do |f| %>
+    <%= f.submit '投稿' %>
+<% end %>
