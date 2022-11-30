@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get 'items/:id/edit/'=> 'items#edit', as: 'items_edit'
     post 'items'=>'items#create'
     patch 'items/:id'=>'items#update', as: 'update_item'
+    get 'orders/:id'=> 'orders#show', as: 'show_order'
   
     
   end
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   patch 'withdrow'=>'public/customers#withdrow'
   patch 'cart_items/:id'=>'public/cart_items#update', as: 'update_cart_items'
   post 'orders'=> 'public/orders#create'
+  patch 'orders/:id'=> 'admin/orders#update', as: 'update_order'
   namespace :public do
    
     get 'orders'=> 'orders#index'

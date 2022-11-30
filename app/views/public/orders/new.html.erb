@@ -7,8 +7,17 @@
  <%end%>
 <h2>お届け先</h2>
 <%= form_with model: @order,  url:  orders_path, method: :post do |f| %>
-  <label><%= f.radio_button :address, @order.address%>ご自身の住所</label>
-  <label><%= f.radio_button :address, @order.postal_code%>ご自身の住所</label>
+  <label><%= f.radio_button :address, @orderes.address%>ご自身の住所</br>
+  <%=  @orderes.address%></br>
+  <%=  @orderes.postal_code%></br>
+  
+  
+  
+  <%= f.radio_button :address, @orderes.postal_code%>登録済住所から選択</label>
+      <%= f.select :address, [['いち',1], ['に',2], ['さん',3]] %>
+                   
+                  
+  
 
   <%= f.submit '投稿' %>
  <%end%>

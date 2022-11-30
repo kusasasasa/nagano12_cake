@@ -1,8 +1,10 @@
 class Public::OrdersController < ApplicationController
     def new
+        #4行目newからallにしている
         @order=Order.new
-        @order.address=current_customer.address
-        @order.postage=current_customer.postal_code
+        @orderes=current_customer
+        
+        
     end
     def index
         @orders=Order.all
@@ -13,6 +15,8 @@ class Public::OrdersController < ApplicationController
     def create
         order=Order.new(order_params)
         order.customer_id = current_customer.id
+        order.postage=800
+        order.total_payment=current_customer.item.price
         order.save
       # 4. トップ画面へリダイレクト
     redirect_to public_cart_items_index_path
