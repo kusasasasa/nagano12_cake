@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+     
     def new
         #4行目newからallにしている
         @order=Order.new
@@ -14,9 +15,11 @@ class Public::OrdersController < ApplicationController
     end
     def create
         order=Order.new(order_params)
+        
+        enum payment_method: { credit_card: 0, transfer: 1 }
         order.customer_id = current_customer.id
         order.postage=800
-        order.total_payment=current_customer.item.price
+        order.total_payment=current_customer.item_id.price
         order.save
       # 4. トップ画面へリダイレクト
     redirect_to public_cart_items_index_path
