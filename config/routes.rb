@@ -31,7 +31,6 @@ Rails.application.routes.draw do
     get 'orders'=> 'orders#index'
     get 'orders/new'=> 'orders#new'
     get 'orders/:id'=> 'orders#show'
-    
     get 'orders/compelte'=> 'orders#compelte'
     post 'orders/confirm'=> 'orders#confirm'
 
