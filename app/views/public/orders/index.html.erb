@@ -1,4 +1,7 @@
-<h1>注文情報確認</h1>
-<% @orders.each do |order| %>
-     <td><%=order.payment_method%></td>
+<h1>注文履歴</h1>
+<% @customers.each do |customer| %>
+     <td><%=customer.order.payment_method%></td>
+     <td><%=customer.order.id%></td>
+     <td><%=customer.cart_item.item_id%></td>
+    
 <%end%>
