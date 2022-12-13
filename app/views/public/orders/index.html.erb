@@ -1,7 +1,32 @@
 <h1>注文履歴</h1>
-<% @customers.each do |customer| %>
-     <td><%=customer.order.payment_method%></td>
-     <td><%=customer.order.id%></td>
-     <td><%=customer.cart_item.item_id%></td>
+
+<table class="table table-striped">
+        <tr>
+            <td>日付</td>
+            <td>配送先</td>
+            <td>注文商品</td>
+            <td>小計</td>
+            <td>ステータス</td>
+            <td>注文詳細</td>
+        </tr>
+        <% @orders.each do |order| %>
+        <tr>
+            <td><%=order.created_at%></td>
+            <td><%=order.address%></td>
+            <td> <% order.order_details.each do |order_detail| %>
+                <%#=@orders[order_detail.order_id]%>
+                <%=@items[order_detail.item_id].name%></br>
+            <%end%>      
+            </td>
+            <td><%=order.total_payment%></td>
+            <td><%= button_to "ボタン名", public_path(order.id), method: :get%></td>
+            <td>
+               
+            </td>
+        </tr>
+        <%end%>         
+     
+
+
+  
     
-<%end%>

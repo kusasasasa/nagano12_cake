@@ -41,13 +41,13 @@
               <%= link_to '商品一覧', public_items_index_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%= link_to '会員一覧', public_cart_items_index_path, class: 'nav-link text-dark' %>
+              <%= link_to '会員一覧', admin_customers_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%= link_to '注文一覧', customers_my_page_path(current_customer.id), class: 'nav-link text-dark' %>
+              <%= link_to '注文一覧', admin_homes_top_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'ジャンル一覧', customers_my_page_path(current_customer.id), class: 'nav-link text-dark' %>
+              <%= link_to 'ジャンル一覧', admin_genres_index_path, class: 'nav-link text-dark' %>
             </li>
             <% else %>
             

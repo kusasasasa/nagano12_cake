@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     patch 'genres/:id'=>'genres#update', as: 'update_genre'
   end
   namespace :admin do
+    resources :customers, only: [:index, :show, :edit]
+    resources :orders, only: [:show]
+    patch 'customer/:id'=>'customers#update', as: 'update_customer'
     get 'items/new'
     get 'items/index'
     get 'items/:id'=> 'items#show', as: 'items_show'
@@ -30,8 +33,8 @@ Rails.application.routes.draw do
    
     get 'orders'=> 'orders#index'
     get 'orders/new'=> 'orders#new'
+    get 'orders/complete'=> 'orders#complete'
     get 'orders/:id'=> 'orders#show'
-    get 'orders/compelte'=> 'orders#compelte'
     post 'orders/confirm'=> 'orders#confirm'
 
     get 'cart_items/index'
@@ -67,5 +70,5 @@ devise_for :admin, controllers: {
   sessions: "admin/sessions"
 }
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
- root 'public/homes#top'
+ root 'admin/homes#top'
 end

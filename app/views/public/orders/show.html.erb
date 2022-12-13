@@ -1,0 +1,17 @@
+<h1>注文履歴詳細</h1>
+<%=@order.name%>
+<%=@order.address%>
+<%=@order.postal_code%>
+<%=@order.payment_method%>
+
+<%@order.order_details.each do | order_detail |%>
+    <%=(@order_price+=order_detail.price).to_i%>
+    <%=(order_detail.price*1.1).to_i%>
+    <%=order_detail.amount%>
+    <%="yyyyy"%>
+    <%=((order_detail.price*1.1).to_i)*order_detail.amount%>
+<%end%>
+<td>お金</td>
+<%=@order_price%>
+<%=@order.postage%>
+<%=@order.total_payment%>

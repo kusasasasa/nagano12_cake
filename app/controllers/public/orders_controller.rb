@@ -8,13 +8,22 @@ class Public::OrdersController < ApplicationController
         
         
     end
+    
     def index
         #orderとcart_itemの値を取得したい
-        #ここで値を作成してveiwに表示すれば良い
-        @customers=current_customer
+        
+        @orders=Order.all
+        @order_details=OrderDetail.all
+        @items=Item.all
+        
+        
+      
+      
     end
     def show
-        
+        @order=Order.find(params[:id])
+        @order_details=OrderDetail.all
+        @order_price=0
     end
     def create
         #入力画面から来たものの処理
@@ -34,14 +43,15 @@ class Public::OrdersController < ApplicationController
             order_detail.save
         end
         @cart_items.destroy_all
-        redirect_to public_orders_compelte_path
+        redirect_to public_orders_complete_path
         #確定画面から来たものの処理
         #1.確認画面から送られた情報とカート内商品をもとに注文・注文詳細テーブルに格納
         #2.カート内の商品を全て削除
   
         
     end
-    def compelte
+    def complete
+        
         
     end
     def confirm
@@ -85,6 +95,7 @@ class Public::OrdersController < ApplicationController
         #2.入力画面から送られた情報を再び注文機能へ送信
         
     end
+    
     private
     def order_params
         params.require(:order).permit(:customer_id, :address, :payment_method, :postage, :postal_code, :total_payment, :status, :name)
