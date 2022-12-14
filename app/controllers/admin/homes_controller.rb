@@ -4,5 +4,6 @@ class Admin::HomesController < ApplicationController
     @orders=Order.all
     @order_details=OrderDetail.all
     @total_amount=0
+    @customers=Customer.all
   end
 end

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :customers, only: [:index, :show, :edit]
-    resources :orders, only: [:show]
+    resources :orders, only: [:show,:update]
     patch 'customer/:id'=>'customers#update', as: 'update_customer'
     get 'items/new'
     get 'items/index'

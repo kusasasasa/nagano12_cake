@@ -1,5 +1,44 @@
 <h1>注文履歴詳細</h1>
-<p><%=@order.name%></p>
+#最初のネイムはカスタマーの方からidを取得してfirst_nameとlast_nameを合体させたものを出力
+<p><%=@customers[@customer_order-1].last_name+@customers[@customer_order-1].address%></p>
 <p><%=@order.created_at%></p>
-<p><%=@address_name%></p>
+<p><%=@order.address%></p>
+<p><%=@order.name%></p>
+<p><%=@order.postal_code%></p>
+<p><%=@order.payment_method%></p>
+<%= form_with model: @order,  url:  admin_order_path, method: :patch do |f| %>
+    <%= f.select :user_id, [['入金待ち', 0], ['入金確認', 1], ['製作中', 2], ['発送準備', 3], ['発送済', 4]], {}, { id: "status", class: "user_class" }%>
+<%=f.submit '投稿'%>
+<%end%>
+<table class="table table-striped">
+        <tr>
+            <td>商品名</td>
+            <td>単価（税込）</td>
+            <td>数量</td>
+            <td>小計</td>
+            <td>注文ステータス</td>
+        </tr>
+        <%@order.order_details.each do |order_detail|%>
+        <tr>
+                <td><%=@items[order_detail.item_id].name%></td>
+                <td><%=(order_detail.price*1.1).to_i%></td>
+                <td><%=order_detail.amount%></td>
+                <td><%=order_detail.amount*(order_detail.price*1.1).to_i%></td>
+                <%@total+=order_detail.amount*(order_detail.price*1.1).to_i%>
+                  
+            
+        </tr>
+        <%end%>
+<tr>
+    <td>小計</td>
+    <td>送料</td>
+    <td>合計</td>
+</tr>
+
+<tr>
+    <td><%=@total%></td>
+    <td><%=@order.postage%></td>
+    <td><%=@total+@order.postage%></td>
+</tr>
+
 
