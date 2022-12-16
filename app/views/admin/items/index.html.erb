@@ -1,4 +1,5 @@
 <h1>商品一覧</h1>
+<%=link_to '+',admin_items_new_path%>
 <table class="table table-striped">
     <tr>
         <td>id</td>
@@ -11,7 +12,7 @@
 
     <tr>
         <td><%=item.id%></td>
-        <td><%=item.name%></td>
+        <td><%=link_to item.name,admin_items_show_path(item.id)%></td>
         <td><%=item.price%></td>
         <td><%=item.genre.name%></td>
         <%if item.is_active == true%>
@@ -26,4 +27,5 @@
 <%end%>
 
 </table>
-<%=link_to '新規登録',admin_items_new_path%>
+
+<%= paginate @items %>

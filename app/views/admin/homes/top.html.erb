@@ -5,6 +5,7 @@
             <td>購入日時</td>
             <td>購入者</td>
             <td>注文個数</td>
+            <td>注文ステータス</td>
             
         
         </tr>
@@ -17,9 +18,10 @@
             <%order.order_details.each do |order_detail|%>
                 <%@total_amount+=order_detail.amount%>
         
-                
-       
-            <%end%>
+        <%end%>
         <td><%=@total_amount%></td> 
+        <td><%=order.status_i18n%></td> 
         </tr>
         <%end%>
+</table>
+<%= paginate @orders %>

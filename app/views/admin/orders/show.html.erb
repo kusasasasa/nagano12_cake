@@ -1,44 +1,89 @@
 <h1>注文履歴詳細</h1>
-#最初のネイムはカスタマーの方からidを取得してfirst_nameとlast_nameを合体させたものを出力
-<p><%=@customers[@customer_order-1].last_name+@customers[@customer_order-1].address%></p>
-<p><%=@order.created_at%></p>
-<p><%=@order.address%></p>
-<p><%=@order.name%></p>
-<p><%=@order.postal_code%></p>
-<p><%=@order.payment_method%></p>
-<%= form_with model: @order,  url:  admin_order_path, method: :patch do |f| %>
-    <%= f.select :user_id, [['入金待ち', 0], ['入金確認', 1], ['製作中', 2], ['発送準備', 3], ['発送済', 4]], {}, { id: "status", class: "user_class" }%>
-<%=f.submit '投稿'%>
-<%end%>
-<table class="table table-striped">
-        <tr>
-            <td>商品名</td>
-            <td>単価（税込）</td>
-            <td>数量</td>
-            <td>小計</td>
-            <td>注文ステータス</td>
-        </tr>
-        <%@order.order_details.each do |order_detail|%>
-        <tr>
-                <td><%=@items[order_detail.item_id].name%></td>
-                <td><%=(order_detail.price*1.1).to_i%></td>
-                <td><%=order_detail.amount%></td>
-                <td><%=order_detail.amount*(order_detail.price*1.1).to_i%></td>
-                <%@total+=order_detail.amount*(order_detail.price*1.1).to_i%>
-                  
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+        <div class="float-left">
+            <ul>
+                <label>購入者</label>
+                <%=@order.name%>
+            </ul>
+            <ul>
+                <li class>注文日</li>
+                <li class><%=@order.created_at%></li>
+            </ul>
+            <ul>
+                <li class>配送先</li>
+                <li class><%=@order.postal_code+" "+@customers[@customer_order-1].last_name+" "+@customers[@customer_order-1].address%></li>
+            </ul>
+            <ul>
+                <li class>支払い方法</li>
+                <li class><%=@order.payment_method_i18n%></li class>
+            </ul>
             
-        </tr>
-        <%end%>
-<tr>
-    <td>小計</td>
-    <td>送料</td>
-    <td>合計</td>
-</tr>
+            
+            
+            
+            <ul>
+                <li class>注文ステータス</li>
+                <li class>
+                    <%= form_with model: @order,  url:  admin_order_path, method: :patch do |f| %>
+                        <%= f.select :status, [['入金待ち', 'wait'], ['入金確認', 'confirmation'], ['製作中', 'making'], ['発送準備', 'prepare'], ['発送済', 'sent']], {}, { id: "status", class: "user_class" }%>
+                    <%=f.submit '更新'%>
+                    <%end%>
+                <li>
+            </ul>
+            
+                        <table class="table table-striped">
+                                <tr>
+                                    <td>商品名</td>
+                                    <td>単価（税込）</td>
+                                    <td>数量</td>
+                                    <td>小計</td>
+                                    <td>注文ステータス</td>
+                                </tr>
+                                <%@order.order_details.each do |order_detail|%>
+                                
+                                    
+                                <tr>
+                                    
+                                        <td><%=@items[order_detail.item_id].name%></td>
+                                        <td><%=(order_detail.price*1.1).to_i%></td>
+                                        <td><%=order_detail.amount%></td>
+                                        <td><%=order_detail.amount*(order_detail.price*1.1).to_i%></td>
+                                        <%@total+=order_detail.amount*(order_detail.price*1.1).to_i%>
+                                        <td> 
+                                            <%= form_with model: order_detail,  url:  admin_order_detail_path(order_detail), method: :patch do |f| %>
+                                            <%= f.select :making_status, [['入金待ち', 'impossible'], ['入金確認', 'wait'], ['製作中', 'making'], ['発送準備', 'complete']], {}, { id: "making_status", class: "user_class" }%>
+                                            <%=f.submit '更新'%>
+                                            <%end%>
+                                        </td>
+                                </tr>
+                                
+                                <%end%>
+                        </table>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
 
-<tr>
-    <td><%=@total%></td>
-    <td><%=@order.postage%></td>
-    <td><%=@total+@order.postage%></td>
-</tr>
+            <ul>
+                <li class>小計</li>
+                <li class><%=@total%></li>
+            </ul>
+            <ul>
+                <li class>送料</li>
+                <li class><%=@order.postage%></li>
+                
+            </ul>
+            <ul>
+                <li class>合計</li>
+                <li class><%=@total+@order.postage%></li>
+            </ul>
+    </div>
+   
+  </div>
+</div>
+
+
 
 
