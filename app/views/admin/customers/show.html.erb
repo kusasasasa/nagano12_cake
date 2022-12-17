@@ -1,24 +1,53 @@
-<h1>会員詳細</h1>
-    <p>会員ID</p>
-    <%=@customer.id%>
-    <p>氏名</p>
-    <%=@customer.first_name + @customer.last_name%>
-    <p>フリガナ</p>
-    <%=@customer.first_name_kana + @customer.last_name_kana%>
-    <p>郵便番号</p>
-    <%=@customer.postal_code%>
-    <p>住所</p>
-    <%=@customer.address%>
-    <p>電話番号</p>
-    <%=@customer.telephone_number%>
-    <p>メールアドレス</p>
-    <%=@customer.email%>
-    <p>会員ステータス</p>
-    <%if @customer.is_deleted==false%>
-        <td><%="有効"%></td>
-    <%else%>
-        <td><%="退会"%></td>
-    <%end%>
-    
-    <%= button_to "編集する",  edit_admin_customer_path(@customer.id) , method: :get %>
-    <%= button_to "ボタン名",  admin_customers_path%>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>会員詳細</h1>
+                <ul>
+                    <label>会員ID</label>
+                    <%=@customer.id%>
+                </ul>
+                <ul>
+                    <label>氏名</label>
+                    <%=@customer.first_name + @customer.last_name%>
+                </ul>
+                <ul>
+                    <label>フリガナ</label>
+                    <%=@customer.first_name_kana + @customer.last_name_kana%>
+                </ul>
+                <ul>
+                    <label>郵便番号</label>
+                    <%=@customer.postal_code%>
+                </ul>
+                <ul>
+                    <label>住所</label>
+                    <%=@customer.address%>
+                </ul>
+                <ul>
+                    <label>電話番号</label>
+                    <%=@customer.telephone_number%>
+                </ul>
+                <ul>
+                    <label>メールアドレス</label>
+                    <%=@customer.email%>
+                </ul>
+                <ul>
+                    <label>会員ステータス</label>
+                    <%if @customer.is_deleted==false%>
+                        <td>
+                            <font color="green"><%="有効"%></font>
+                        </td>
+                    <%else%>
+                        <td>
+                            <font color="red"><%="退会"%></font>
+                        </td>
+                    <%end%>
+                </ul>
+                <ul>
+                    <label><%= link_to "編集する",  edit_admin_customer_path(@customer.id) , method: :get, class: "btn btn-secondary" %></label>
+                    <label><%= link_to "注文一覧を見る",  admin_homes_top_path, class: "btn btn-secondary"%></label>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>

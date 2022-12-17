@@ -1,38 +1,37 @@
 <h1>注文履歴詳細</h1>
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
-        <div class="float-left">
+        <div class="col-lg-8">
+        
             <ul>
                 <label>購入者</label>
                 <%=@order.name%>
             </ul>
             <ul>
-                <li class>注文日</li>
-                <li class><%=@order.created_at%></li>
+                <label>注文日</label>
+                <%=@order.created_at%>
             </ul>
             <ul>
-                <li class>配送先</li>
-                <li class><%=@order.postal_code+" "+@customers[@customer_order-1].last_name+" "+@customers[@customer_order-1].address%></li>
+                <label>配送先</label>
+                <%=@order.postal_code+" "+@customers[@customer_order-1].last_name+" "+@customers[@customer_order-1].address%>
             </ul>
             <ul>
-                <li class>支払い方法</li>
-                <li class><%=@order.payment_method_i18n%></li class>
+                <label>支払い方法</label>
+                <%=@order.payment_method_i18n%>
             </ul>
-            
-            
             
             
             <ul>
-                <li class>注文ステータス</li>
-                <li class>
-                    <%= form_with model: @order,  url:  admin_order_path, method: :patch do |f| %>
-                        <%= f.select :status, [['入金待ち', 'wait'], ['入金確認', 'confirmation'], ['製作中', 'making'], ['発送準備', 'prepare'], ['発送済', 'sent']], {}, { id: "status", class: "user_class" }%>
-                    <%=f.submit '更新'%>
-                    <%end%>
-                <li>
+                <%= form_with model: @order,  url:  admin_order_path, method: :patch do |f| %>
+                <label>注文ステータス</label>
+                <%= f.select :status, [['入金待ち', 'wait'], ['入金確認', 'confirmation'], ['製作中', 'making'], ['発送準備', 'prepare'], ['発送済', 'sent']], {}, { id: "status", class: "user_class" }%>
+                <%=f.submit '更新'%>
+                <%end%>
+                
             </ul>
-            
+        </div>
+        
+        <div class="col-lg-8">
                         <table class="table table-striped">
                                 <tr>
                                     <td>商品名</td>
@@ -62,25 +61,23 @@
                                 <%end%>
                         </table>
         </div>
-    </div>
-    <div class="col-lg-4">
-        
-
-            <ul>
-                <li class>小計</li>
-                <li class><%=@total%></li>
-            </ul>
-            <ul>
-                <li class>送料</li>
-                <li class><%=@order.postage%></li>
-                
-            </ul>
-            <ul>
-                <li class>合計</li>
-                <li class><%=@total+@order.postage%></li>
-            </ul>
-    </div>
-   
+    
+        <div class="col-lg-4">
+            
+    
+                <ul>
+                    <label>小計</label>
+                    <%=@total%>
+                </ul>
+                <ul>
+                    <label>送料</label>
+                    <%=@order.postage%>
+                </ul>
+                <ul>
+                    <label>合計</label>
+                    <%=@total+@order.postage%>
+                </ul>
+        </div>
   </div>
 </div>
 

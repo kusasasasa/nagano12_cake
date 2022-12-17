@@ -1,22 +1,32 @@
-<h1>会員一覧</h1>
-<table class="table table-striped">
-    <tr>
-        <td>会員ナンバー</td>
-        <td>氏名</td>
-        <td>メールアドレス</td>
-        <td>ステータス</td>
-    </tr>
-<%@customers.each do |customer|%>
-    <tr>
-        <td><%=customer.id%></td>
-        <td><%=link_to customer.last_name+customer.first_name, admin_customer_path(customer.id)%></td>
-        <td><%=customer.email%></td>
-        <%if customer.is_deleted==false%>
-            <td><%="有効"%></td>
-        <%else%>
-            <td><%="退会"%></td>
+<main>
+    <div class="container">
+      <div class="row">
+        <h1>会員一覧</h1>
+        <table class="table table-striped">
+            <tr>
+                <td>会員ナンバー</td>
+                <td>氏名</td>
+                <td>メールアドレス</td>
+                <td>ステータス</td>
+            </tr>
+        <%@customers.each do |customer|%>
+            <tr>
+                <td><%=customer.id%></td>
+                <td><%=link_to customer.last_name+customer.first_name, admin_customer_path(customer.id)%></td>
+                <td><%=customer.email%></td>
+                <%if customer.is_deleted==false%>
+                    <td>
+                          <font color="green"><%="有効"%></font>
+                    </td>
+                <%else%>
+                    <td>
+                        <font color="red"><%="退会"%></font>
+                    </td>
+                <%end%>
+            </tr>
         <%end%>
-    </tr>
-<%end%>
-</table>
-<%= paginate @customers %>
+        </table>
+        <%= paginate @customers %>
+      </div>
+    </div>
+</main>

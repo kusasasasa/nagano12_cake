@@ -1,31 +1,50 @@
-<h1>商品一覧</h1>
-<%=link_to '+',admin_items_new_path%>
-<table class="table table-striped">
-    <tr>
-        <td>id</td>
-        <td>名前</td>
-        <td>販売価格</td>
-        <td>ジャンル</td>
-        <td>販売ステータス</td>
-    </tr>
-<% @items.each do |item| %>
 
-    <tr>
-        <td><%=item.id%></td>
-        <td><%=link_to item.name,admin_items_show_path(item.id)%></td>
-        <td><%=item.price%></td>
-        <td><%=item.genre.name%></td>
-        <%if item.is_active == true%>
-            <td>販売中</td>
-        <%else%>
-            <td>販売停止</td>
-        <%end%>
-        
-    </tr>
-
-   
-<%end%>
-
-</table>
-
-<%= paginate @items %>
+    <main>
+        <div class="container px5 px-mx-0">
+          <div class="row">
+          <div class="col-md-4">
+                <h2>商品一覧</h2>
+              </div>
+          <div class="col-md-8">
+                <div class="float-right">
+                    <%=link_to admin_items_new_path, :method => :get do %>
+                        <i class="fa-solid fa-gear"></i>
+                    <%end%>
+                </div>
+          </div>
+          </div>
+                <table class="table table-striped">
+                    <tr>
+                        <td>id</td>
+                        <td>名前</td>
+                        <td>販売価格</td>
+                        <td>ジャンル</td>
+                        <td>販売ステータス</td>
+                    </tr>
+                <% @items.each do |item| %>
+                
+                    <tr>
+                        <td><%=item.id%></td>
+                        <td><%=link_to item.name,admin_items_show_path(item.id)%></td>
+                        <td><%=item.price%></td>
+                        <td><%=item.genre.name%></td>
+                        <%if item.is_active == true%>
+                            <td>販売中</td>
+                        <%else%>
+                            <td>販売停止</td>
+                        <%end%>
+                        
+                    </tr>
+                
+                   
+                <%end%>
+                
+                </table>
+                
+                <%= paginate @items %>
+            
+          </div>
+        </div>
+    </main>
+</html>
+ 

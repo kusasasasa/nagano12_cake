@@ -1,36 +1,49 @@
-<h1>商品詳細</h1>
-<li>
-    <td>画像</td>
-    <% if @item.image.attached? %>
-        <td><%= image_tag @item.image, size: "100x100" %></td>
-    <% else %>
-        <td><%= image_tag 'no_image', size: "100x100" %></td>
-    <% end %>
-    
-</li>
-  
-<li>
-    <td>商品名</td>
-    <td><%=@item.name%></td>
-</li>
-<li>
-    <td>商品説明</td>
-    <td><%=@item.introduction%></td>
-</li>
-<li>
-    <td>ジャンル</td>
-    <td><%=@item.genre.name%></td>
-</li>
-<li>
-    <td>税込価格</td>
-    <td><%=@item.price%></td>
-</li>
-<li>
-    <td>販売ステータス</td>
-    <%if @item.is_active == true%>
-            <td>販売中</td>
-        <%else%>
-            <td>販売停止</td>
-        <%end%>
-</li>
-<%=link_to '編集',admin_items_edit_path%>
+<main>
+    <div class="container">
+        <h1>商品詳細</h1>
+      <div class="row">
+            
+            <div class="col-md-4">
+            
+                <ul>
+                
+                    <% if @item.image.attached? %>
+                        <label><%= image_tag @item.image, size: "100x100" %></label>
+                    <% else %>
+                        <label><%= image_tag 'no_image', size: "100x100" %></label>
+                    <% end %>
+                    
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <ul>
+                    <label>商品名</label>
+                    <label><%=@item.name%></label>
+                </ul>
+                <ul>
+                    <label>商品説明</label>
+                    <label><%=@item.introduction%></label>
+                </ul>
+                <ul>
+                    <label>ジャンル</label>
+                    <label><%=@item.genre.name%></label>
+                </ul>
+                <ul>
+                    <label>税込価格</label>
+                    <label><%=@item.price%></label>
+                </ul>
+                <ul>
+                    <label>販売ステータス</label>
+                    <%if @item.is_active == true%>
+                            <label>販売中</label>
+                        <%else%>
+                            <label>販売停止</label>
+                        <%end%>
+                </ul>
+                <ul>
+                    <%=link_to '編集',admin_items_edit_path, class: "btn btn-secondary"%>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
