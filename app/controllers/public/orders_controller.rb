@@ -11,8 +11,10 @@ class Public::OrdersController < ApplicationController
     
     def index
         #orderとcart_itemの値を取得したい
-        
-        @orders=Order.all
+       
+      
+        @customer=current_customer
+        @orders=current_customer.orders.page(params[:page])
         @order_details=OrderDetail.all
         @items=Item.all
         
@@ -24,6 +26,9 @@ class Public::OrdersController < ApplicationController
         @order=Order.find(params[:id])
         @order_details=OrderDetail.all
         @order_price=0
+        @items=Item.all
+        @customers=Customer.all
+        
     end
     def create
         #入力画面から来たものの処理

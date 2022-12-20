@@ -5,11 +5,11 @@
         
             <ul>
                 <label>購入者</label>
-                <%=@order.name%>
+                <%=link_to @order.customer.first_name+@order.customer.last_name,admin_customer_path(@order.customer_id)%>
             </ul>
             <ul>
                 <label>注文日</label>
-                <%=@order.created_at%>
+                <%=@order.created_at.strftime('%Y/%m/%d')%>
             </ul>
             <ul>
                 <label>配送先</label>
@@ -25,7 +25,7 @@
                 <%= form_with model: @order,  url:  admin_order_path, method: :patch do |f| %>
                 <label>注文ステータス</label>
                 <%= f.select :status, [['入金待ち', 'wait'], ['入金確認', 'confirmation'], ['製作中', 'making'], ['発送準備', 'prepare'], ['発送済', 'sent']], {}, { id: "status", class: "user_class" }%>
-                <%=f.submit '更新'%>
+                <%=f.submit '更新', class: 'btn-success'%>
                 <%end%>
                 
             </ul>
@@ -38,22 +38,22 @@
                                     <td>単価（税込）</td>
                                     <td>数量</td>
                                     <td>小計</td>
-                                    <td>注文ステータス</td>
+                                    <td>制作ステータス</td>
                                 </tr>
                                 <%@order.order_details.each do |order_detail|%>
                                 
                                     
                                 <tr>
                                     
-                                        <td><%=@items[order_detail.item_id].name%></td>
+                                        <td><%=@items[order_detail.item_id-1].name%></td>
                                         <td><%=(order_detail.price*1.1).to_i%></td>
                                         <td><%=order_detail.amount%></td>
                                         <td><%=order_detail.amount*(order_detail.price*1.1).to_i%></td>
                                         <%@total+=order_detail.amount*(order_detail.price*1.1).to_i%>
                                         <td> 
                                             <%= form_with model: order_detail,  url:  admin_order_detail_path(order_detail), method: :patch do |f| %>
-                                            <%= f.select :making_status, [['入金待ち', 'impossible'], ['入金確認', 'wait'], ['製作中', 'making'], ['発送準備', 'complete']], {}, { id: "making_status", class: "user_class" }%>
-                                            <%=f.submit '更新'%>
+                                            <%= f.select :making_status, [['着手不可', 'impossible'], ['製作待ち', 'wait'], ['製作中', 'making'], ['発送済み', 'complete']], {}, { id: "making_status", class: "user_class" }%>
+                                            <%=f.submit '更新',class: 'btn-success'%>
                                             <%end%>
                                         </td>
                                 </tr>

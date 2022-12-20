@@ -1,27 +1,32 @@
-<h1>注文履歴一覧</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
-<table class="table table-striped">
-        <tr>
-            <td>購入日時</td>
-            <td>購入者</td>
-            <td>注文個数</td>
-            <td>注文ステータス</td>
-            
-        
-        </tr>
-        <%@orders.each do |order|%>
-        <tr>
-            
-            <td><%=link_to order.created_at, admin_show_order_path(order.id)%></td>
-            <td><%=@customers[order.customer_id-1].first_name+@customers[order.customer_id-1].last_name%></td>
-             <%@total_amount=0%>
-            <%order.order_details.each do |order_detail|%>
-                <%@total_amount+=order_detail.amount%>
-        
-        <%end%>
-        <td><%=@total_amount%></td> 
-        <td><%=order.status_i18n%></td> 
-        </tr>
-        <%end%>
-</table>
-<%= paginate @orders %>
+<main>
+    <div class="container">
+      <div class="row">
+        <h1>注文履歴一覧</h1>
+        <table class="table table-striped">
+                <tr>
+                    <td>購入日時</td>
+                    <td>購入者</td>
+                    <td>注文個数</td>
+                    <td>注文ステータス</td>
+                    
+                
+                </tr>
+                <%@orders.each do |order|%>
+                <tr>
+                    
+                    <td><%=link_to order.created_at.strftime('%Y/%m/%d'), admin_show_order_path(order.id)%></td>
+                    <td><%=@customers[order.customer_id-1].first_name+@customers[order.customer_id-1].last_name%></td>
+                     <%@total_amount=0%>
+                    <%order.order_details.each do |order_detail|%>
+                        <%@total_amount+=order_detail.amount%>
+                
+                <%end%>
+                <td><%=@total_amount%></td> 
+                <td><%=order.status_i18n%></td> 
+                </tr>
+                <%end%>
+        </table>
+        <%= paginate @orders %>
+      </div>
+    </div>
+</main>

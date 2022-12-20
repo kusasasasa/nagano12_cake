@@ -1,39 +1,23 @@
 <h1>マイページ</h1>
-<h2>登録情報</h2>
-
-<%= link_to '編集する', customers_edit_path, class: 'nav-link text-dark' %>
-    <table>
-        <tr>氏名</tr>
-        <tr>カナ</tr>
-       
-        <tr>郵便番号</tr>
-        <tr>住所</tr>
-        <tr>電話番号</tr>
-        <tr>email</tr>
-        <td>
-            <%=@customer.first_name%>
-            <%=@customer.last_name%>
-        </td>
-        <td>
-            <%=@customer.first_name_kana%>
-            <%=@customer.last_name_kana%>
-        </td>
-        
-        <td>
-            <%=@customer.postal_code%>
-        </td>
-        <td>
-            <%=@customer.address%>
-        </td>
-        <td>
-            <%=@customer.telephone_number%>
-        </td>
-        <td>
-            <%=@customer.email%>
-        </td>
-     
-    </table>
-<%= link_to '配送先', public_addresses_path, class: 'nav-link text-dark' %>
-<%= link_to '注文履歴', public_orders_path, class: 'nav-link text-dark' %>
-
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <tr><th>登録情報 </th><td><%= link_to '編集する', customers_edit_path, class: 'btn-success' %></td></tr>
+                <table class="table table-striped">
+                    <tr><th>氏名</th><td><%=@customer.first_name+@customer.last_name%></td></tr>
+                    <tr><th>カナ</th><td><%=@customer.first_name_kana+@customer.last_name_kana%></td></tr>
+                    <tr><th>郵便番号</th><td><%=@customer.postal_code%></td></tr>
+                    <tr><th>住所</th><td><%=@customer.address%></td></tr>
+                    <tr><th>電話番号</th><td><%=@customer.telephone_number%></td></tr>
+                    <tr><th>email</th><td><%=@customer.email%></td></tr>
+                </table>
+        </div>
+        <table>
+            <tr><th>配送先</th><td><%= link_to '一覧を見る', public_addresses_path,class: 'btn-primary' %></td></tr>
+            <tr><th>注文履歴 </th><td><%= link_to '一覧を見る', public_orders_path,class: 'btn-primary' %></td></tr>
+        </table>
+            
+    </div>
+</div>
+            
+            

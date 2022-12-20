@@ -1,48 +1,49 @@
 <h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
-<%= form_with model: @customer, url: customers_path ,method: :patch do |f| %>
-  
-    
-    <div class="form-group">
-      <label class="col-sm-3 col-form-label">名前</label>
-      <%=f.label :（姓） %>
-      <%= f.text_field :first_name %>
-    
-      <%= f.label :（名） %>
-      <%= f.text_field :last_name %>
-    </div>
- 
-    <div class="form-group">
-      <label class="col-sm-3 col-form-label">フリガナ</label>
-      <%= f.label :（セイ） %>
-      <%= f.text_field :first_name_kana %>
-      <%= f.label :（メイ） %>
-      <%= f.text_field :last_name_kana %>
-    </div>
- 
-    <div class="field">
-       <label class="col-sm-4 col-form-label">email</label>
-       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-    <div class="field">
-          <label class="col-sm-4 col-form-label">郵便番号（ハイフンなし）</label>
-          <%= f.text_field :postal_code %>
-    </div>
-    <div class="field">
-        <label class="col-sm-4 col-form-label">住所</label>
-        <%= f.text_field :address %>
-    </div>
-    <div class="field">
-        <label class="col-sm-4 col-form-label">電話番号（ハイフンなし）</label>
-        <%= f.text_field :telephone_number %>
-    </div>
-  
-      
-
-
-  <div class="actions">
-    <%= f.submit "変更内容を保存する" %>
+<main>
+  <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <%= form_with model: @customer, url: customers_path ,method: :patch do |f| %>
+            <div class="form-group">
+              <label class="col-sm-4 col-form-label">名前</label>
+              <%= f.text_field :first_name %>
+              <%= f.text_field :last_name %>
+            </div>
+         
+            <div class="form-group">
+              <label class="col-sm-4 col-form-label">フリガナ</label>
+              <%= f.text_field :first_name_kana %>
+              <%= f.text_field :last_name_kana %>
+            </div>
+         
+            <div class="field">
+               <label class="col-sm-4 col-form-label">email</label>
+               <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </div>
+            <div class="field">
+                  <label class="col-sm-4 col-form-label">郵便番号（ハイフンなし）</label>
+                  <%= f.text_field :postal_code %>
+            </div>
+            <div class="field">
+                <label class="col-sm-4 col-form-label">住所</label>
+                <%= f.text_field :address %>
+            </div>
+            <div class="field">
+                <label class="col-sm-4 col-form-label">電話番号（ハイフンなし）</label>
+                <%= f.text_field :telephone_number %>
+            </div>
+          
+              
+        
+        
+          <tr>
+            <td><%= f.submit "変更内容を保存する",class: 'btn-success' %></td>
+          
+            <td><%=link_to"退会する",unsubscribe_path,class: 'btn-danger' %></td>
+          </tr>
+        <% end %>
+        </div>
+      </div>
   </div>
-  <%=link_to"退会する",unsubscribe_path %>
-<% end %>
+</main>
 

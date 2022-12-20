@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
                     admin_homes_top_path
                 end
             end
+           
             private
 
             def configure_permitted_parameters

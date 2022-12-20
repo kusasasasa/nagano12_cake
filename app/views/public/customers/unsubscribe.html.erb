@@ -1,3 +1,10 @@
 <h1>退会機能</h1>
- <%= link_to "退会する", withdrow_path, method: :patch, data: { confilm: "本当に退会しますか？" } %>
- <%= link_to "退会しない", root_path %>
+<div class="container">
+      <div class="row">
+        <div class="col-md-10">
+         <%= link_to "退会する", withdrow_path, method: :patch, data: { confirm: "本当に退会しますか？" } ,class: 'btn-danger' %>
+         <%= link_to "退会しない", root_path,class: 'btn-primary'  %>
+        </div>
+      </div>
+</div>
+      

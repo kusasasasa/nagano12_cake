@@ -2,5 +2,5 @@
 <%= form_with model: @genres , url: admin_update_genre_path(@genre.id), method: :patch do |f| %>
   <label for="inputName">ジャンル名</label>
   <%= f.text_field :name, autofocus: true, id:"inputName", placeholder: @genre.name%>
-  <%= f.submit '変更を保存' %>
+  <%= f.submit '変更を保存' ,class: 'btn-success' %>
 <% end %>

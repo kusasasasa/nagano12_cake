@@ -1,27 +1,38 @@
 <h1>商品一覧</h1>
-
+<main>
+<div style="display: flex; flex-wrap: wrap;"> 
 <% @items.each do |item| %>
-<li>
-    <td>画像</td>
-    <% if item.image.attached? %>
-        <td><%=link_to (image_tag item.image, size: "100x100"), public_items_show_path(item.id) %></td>
-    <% else %>
-        <td><%=link_to (image_tag 'no_image', size: "100x100"), public_items_show_path(item.id) %></td>
-    <% end %>
+   
+    <div style="text-align: center; padding: 10px 0; margin: 0 auto;">
+    <div style="list-style: none; display: inline-block; margin: 0 20px;">
+        <td>画像</td>
+        <% if item.image.attached? %>
+            <td><%=link_to (image_tag item.image, size: "100x100"), public_items_show_path(item.id) %></td>
+        <% else %>
+            <td><%=link_to (image_tag 'no_image', size: "100x100"), public_items_show_path(item.id) %></td>
+        <% end %>
+        <div class="list-comment">
+            
+              
+            <li>
+                <td>商品名</td>
+                <td><%=item.name%></td>
+            </li>
+            
+            <li>
+                <td>税込価格</td>
+                <td><%=item.price%></td>
+            </li>
+            
+            
+        
+        </div>
+    </div>
+    </div>
     
-</li>
-  
-<li>
-    <td>商品名</td>
-    <td><%=item.name%></td>
-</li>
-
-<li>
-    <td>税込価格</td>
-    <td><%=item.price%></td>
-</li>
-
-
 <%end%>
-<%= paginate @items %>
+
+</div>
+</main>
+<p class="text_center"><%= paginate @items %></p>
 

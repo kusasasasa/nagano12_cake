@@ -1,39 +1,55 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
-<table class="table table-striped">
-    <tr>
-        <td>名前</td>
-        <td>個数</td>
-        <td>単価（税込）</td>
-        <td>小計</td>
-        <td></td>
-        
-    </tr>
-    <% @cart_items.each do |cart_item| %>
-        <% if current_customer.id==cart_item.customer_id %>
-            <tr>
-                <td><%=cart_item.item.name%></td>
-                <td><%=cart_item.amount%>
-                    <%= form_with model: cart_item, url:  update_cart_items_path(cart_item.id), method: :patch do |f| %>
-                        <%= f.select :amount, [['いち',1], ['に',2], ['さん',3]] %>
-                        <%= f.submit '投稿' %>
-                    <% end %>
-                </td>
-                <td><%= cart_item.item.with_tax_price%></td>
-                <td><%= cart_item.subtotal%></td>
-                <% @item_total+=cart_item.subtotal %>
-                <%= form_with model: cart_item, url:  public_destroy_cart_items_path(cart_item.id), method: :delete do |f| %>
-                    <td><%= f.submit '投稿' %></td>
-                <% end %>
-            </tr>
-        <%end%>
-    <%end%>
-    <tr>
-        <td>購入金額</td>
-        <td><%= @item_total%></td>
-    </tr> 
-    <%= button_to "全て削除", public_destroy_all_path, method: :delete %>
-</table>
-<%= form_with model: @cart_item, url: public_orders_new_path , method: :get do |f| %>
-    <%= f.submit '投稿' %>
-<% end %>
+
+<div class="container">
+    <h2>カートアイテム</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <tr>
+                    <td>名前</td>
+                    <td>個数</td>
+                    <td>単価（税込）</td>
+                    <td>小計</td>
+                    <td></td>
+                    
+                </tr>
+                <% @cart_items.each do |cart_item| %>
+                    <% if current_customer.id==cart_item.customer_id %>
+                        <tr>
+                            <td><%=cart_item.item.name%></td>
+                            <td><%= cart_item.item.with_tax_price%></td>
+                            <td>
+                                <%=cart_item.amount%>
+                                <%= form_with model: cart_item, url:  update_cart_items_path(cart_item.id), method: :patch do |f| %>
+                                    <%= f.select :amount, [['いち',1], ['に',2], ['さん',3]] %>
+                                    <%= f.submit '変更',class: 'btn-success' %>
+                                <% end %>
+                            </td>
+                            <td><%= cart_item.subtotal%></td>
+                            <% @item_total+=cart_item.subtotal %>
+                            <%= form_with model: cart_item, url:  public_destroy_cart_items_path(cart_item.id), method: :delete do |f| %>
+                                <td><%= f.submit '削除',class: 'btn-danger' %></td>
+                            <% end %>
+                        </tr>
+                    <%end%>
+                <%end%>
+                
+                <p class="text-right"><%= button_to "全て削除", public_destroy_all_path, method: :delete,class: 'btn-danger' %></p>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <table class="table table-striped">
+                <tr>
+                    
+                    <td>購入金額</td>
+                    <td><%= @item_total%></td>
+                </tr> 
+            </table>
+            <%= form_with model: @cart_item, url: public_orders_new_path , method: :get do |f| %>
+                <p class="text-left"><%= link_to '買い物を続ける',public_homes_top_path,class: 'btn-primary'%></p>
+                <%if @item_total>1%>
+                    <p class="text-center"><%= f.submit '情報入力に進む',class: 'btn-success'%></p>
+                <%end%>
+            <% end %>
+        </div>
+    </div>
+</div>

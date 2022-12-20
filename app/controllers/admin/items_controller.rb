@@ -23,12 +23,12 @@ class Admin::ItemsController < ApplicationController
     # 3. データをデータベースに保存するためのsaveメソッド実行
     item.save
     # 4. トップ画面へリダイレクト
-    redirect_to admin_items_index_path
+    redirect_to admin_items_show_path(item.id)
   end
   def update
     item = Item.find(params[:id])
     item.update(item_params)
-    redirect_to admin_items_index_path  
+    redirect_to admin_items_show_path(item.id) 
   end
   private
   # ストロングパラメータ

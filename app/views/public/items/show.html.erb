@@ -1,36 +1,41 @@
-<h1>Public::Items#show</h1>
 
-<li>
-    <td>画像</td>
-    <% if @item.image.attached? %>
-        <td><%= image_tag @item.image, size: "100x100" %></td>
-    <% else %>
-        <td><%= image_tag 'no_image', size: "100x100" %></td>
-    <% end %>
-    
-</li>
-  
-<li>
-    <td>商品名</td>
-    <td><%=@item.name%></td>
-</li>
-<li>
-    <td>商品名</td>
-    <td><%=@item.introduction%></td>
-</li>
-<li>
-    <td>税込価格</td>
-    <td><%=@item.price%></td>
-</li>
-<%= form_with model: @cart_item, url: public_cart_items_path, method: :post do |f| %>
-    <%= f.select :amount, [['いち',1], ['に',2], ['さん',3]] %>
-    <%= f.hidden_field :item_id, :value => @item.id %>
-    <% if customer_signed_in? %>
-    
-        <%=f.submit '購入する' %>
-    <%end%>
-<% end %>
-
-
-
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <ul>
+                <label>画像</label>
+                <% if @item.image.attached? %>
+                    <%= image_tag @item.image, size: "100x100" %>
+                <% else %>
+                    <%= image_tag 'no_image', size: "100x100" %>
+                <% end %>
+        </div>
+        <div class="col-md-7">     
+            </ul>
+              
+            <ul>
+                <label>商品名</laebl>
+                <%=@item.name%>
+            </ul>
+            <ul>
+                <label>商品説明</laebl>
+                <%=@item.introduction%>
+            </ul>
+            <ul>
+                <label>税込価格</label>
+                <%=((@item.price)*1.1).to_i%>
+            </ul>
+            <%= form_with model: @cart_item, url: public_cart_items_path, method: :post do |f| %>
+                <%= f.select :amount, [['いち',1], ['に',2], ['さん',3]] %>
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <% if customer_signed_in? %>
+                
+                    <%=f.submit '購入する' %>
+                <%end%>
+            <% end %>
+        </div> 
+    </div>
+</div>
+            
+            
+            
